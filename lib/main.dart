@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       initialRoute: HomeScreen.routeName,
       routes: {
-        HomeScreen.routeName: (context) => const HomeScreen(),
-        GameBoardingScreen.routeName: (context) => const GameBoardingScreen(),
+        HomeScreen.routeName: (context) => HomeScreen(),
+        GameBoardingScreen.routeName: (context) => GameBoardingScreen(),
       },
       home: HomeScreen(),
     );
