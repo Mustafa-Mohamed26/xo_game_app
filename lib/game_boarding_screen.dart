@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xo_game_app/board_tile.dart';
+import 'package:xo_game_app/game_boarding_args.dart';
 
 class GameBoardingScreen extends StatefulWidget {
   static const String routeName = 'game_boarding_screen';
@@ -15,22 +16,31 @@ class _GameBoardingScreenState extends State<GameBoardingScreen> {
   int counter = 0;
   int player1Score = 0;
   int player2Score = 0;
+  late GameBoardingArgs args;
+  String title = "Player 1's Turn";
 
   void onPlayerClick(int index) {
     if (boardState[index].isNotEmpty) {
       return;
     }
     if (counter % 2 == 0) {
-      boardState[index] = 'x';
+      boardState[index] = args.firstPlayer;
+      title = "Player 1's Turn";
     } else {
-      boardState[index] = 'o';
+      boardState[index] = args.secondPlayer;
+      title = "Player 2's Turn";
     }
     counter++;
-    if (checkWinner('x')) {
+    if (checkWinner(args.firstPlayer)) {
+      title = "Player 1's Win";
       player1Score++;
       Future.delayed(Duration(seconds: 1), resetBoard);
-    } else if (checkWinner('o')) {
+    } else if (checkWinner(args.secondPlayer)) {
+      title = "Player 2's Win";
       player2Score++;
+      Future.delayed(Duration(seconds: 1), () => resetBoard());
+    } else if (counter == 9) {
+      title = "Non Player won";
       Future.delayed(Duration(seconds: 1), () => resetBoard());
     }
     setState(() {});
@@ -76,6 +86,7 @@ class _GameBoardingScreenState extends State<GameBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    args = ModalRoute.of(context)?.settings.arguments as GameBoardingArgs;
     return SafeArea(
       child: Container(
         decoration: BoxDecoration(
@@ -99,13 +110,13 @@ class _GameBoardingScreenState extends State<GameBoardingScreen> {
                     color: Colors.white,
                   ),
                   child: Text(
-                    'X: $player1Score     &     O: $player2Score',
+                    '${args.firstPlayer}: $player1Score     &     ${args.secondPlayer}: $player2Score',
                     style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600),
                   ),
                 ),
                 SizedBox(height: 16),
                 Text(
-                  "Player 1's Turn",
+                  title,
                   style: TextStyle(
                     fontSize: 36,
                     fontWeight: FontWeight.w600,

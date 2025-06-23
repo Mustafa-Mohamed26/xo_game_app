@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xo_game_app/game_boarding_args.dart';
 import 'package:xo_game_app/game_boarding_screen.dart';
 import 'package:xo_game_app/player_choice.dart';
 
@@ -37,7 +38,13 @@ class HomeScreen extends StatelessWidget {
                     Expanded(
                       child: InkWell(
                         onTap: () {
-                          Navigator.of(context).pushNamed(GameBoardingScreen.routeName, arguments: 'x');
+                          Navigator.of(context).pushNamed(
+                            GameBoardingScreen.routeName,
+                            arguments: GameBoardingArgs(
+                              firstPlayer: "x",
+                              secondPlayer: "o",
+                            ),
+                          );
                         },
                         child: PlayerChoice(symbol: 'x'),
                       ),
@@ -46,7 +53,13 @@ class HomeScreen extends StatelessWidget {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.of(context).pushNamed(GameBoardingScreen.routeName, arguments: 'o');
+                          Navigator.of(context).pushNamed(
+                            GameBoardingScreen.routeName,
+                            arguments: GameBoardingArgs(
+                              firstPlayer: "o",
+                              secondPlayer: "x",
+                            ),
+                          );
                         },
                         child: PlayerChoice(symbol: 'o'),
                       ),
