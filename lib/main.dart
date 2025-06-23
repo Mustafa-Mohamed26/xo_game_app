@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xo_game_app/game_boarding_screen.dart';
 import 'package:xo_game_app/home_screen.dart';
 
 void main(){
@@ -11,9 +12,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      initialRoute: HomeScreen.routeName,
+      routes: {
+        HomeScreen.routeName: (context) => const HomeScreen(),
+        GameBoardingScreen.routeName: (context) => const GameBoardingScreen(),
+      },
       home: HomeScreen(),
     );
   }

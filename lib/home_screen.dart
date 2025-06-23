@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:xo_game_app/game_boarding_screen.dart';
 import 'package:xo_game_app/player_choice.dart';
 
 class HomeScreen extends StatelessWidget {
+  static const String routeName = 'home_screen';
   const HomeScreen({super.key});
 
   @override
@@ -34,14 +36,18 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).pushNamed(GameBoardingScreen.routeName, arguments: 'x');
+                        },
                         child: PlayerChoice(symbol: 'x'),
                       ),
                     ),
                     const SizedBox(width: 16),
                     Expanded(
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).pushNamed(GameBoardingScreen.routeName, arguments: 'o');
+                        },
                         child: PlayerChoice(symbol: 'o'),
                       ),
                     ),
